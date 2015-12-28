@@ -1,0 +1,242 @@
+   1               		.file	"microsTest.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	__vector_11
+  18               	__vector_11:
+  19               	.LFB6:
+  20               	.LM1:
+  21 0000 1F92      		push __zero_reg__
+  22 0002 0F92      		push r0
+  23 0004 0FB6      		in r0,__SREG__
+  24 0006 0F92      		push r0
+  25 0008 1124      		clr __zero_reg__
+  26 000a 8F93      		push r24
+  27 000c 9F93      		push r25
+  28 000e AF93      		push r26
+  29 0010 BF93      		push r27
+  30               	/* prologue: Signal */
+  31               	/* frame size = 0 */
+  32               	.LM2:
+  33 0012 8091 0000 		lds r24,timer1_overflow_count
+  34 0016 9091 0000 		lds r25,(timer1_overflow_count)+1
+  35 001a A091 0000 		lds r26,(timer1_overflow_count)+2
+  36 001e B091 0000 		lds r27,(timer1_overflow_count)+3
+  37 0022 0196      		adiw r24,1
+  38 0024 A11D      		adc r26,__zero_reg__
+  39 0026 B11D      		adc r27,__zero_reg__
+  40 0028 8093 0000 		sts timer1_overflow_count,r24
+  41 002c 9093 0000 		sts (timer1_overflow_count)+1,r25
+  42 0030 A093 0000 		sts (timer1_overflow_count)+2,r26
+  43 0034 B093 0000 		sts (timer1_overflow_count)+3,r27
+  44               	/* epilogue start */
+  45               	.LM3:
+  46 0038 BF91      		pop r27
+  47 003a AF91      		pop r26
+  48 003c 9F91      		pop r25
+  49 003e 8F91      		pop r24
+  50 0040 0F90      		pop r0
+  51 0042 0FBE      		out __SREG__,r0
+  52 0044 0F90      		pop r0
+  53 0046 1F90      		pop __zero_reg__
+  54 0048 1895      		reti
+  55               	.LFE6:
+  57               	.global	main
+  59               	main:
+  60               	.LFB7:
+  61               	.LM4:
+  62 004a EF92      		push r14
+  63 004c FF92      		push r15
+  64 004e 0F93      		push r16
+  65 0050 1F93      		push r17
+  66               	/* prologue: function */
+  67               	/* frame size = 0 */
+  68               	.LM5:
+  69 0052 559A      		sbi 42-32,5
+  70               	.LM6:
+  71 0054 5D9A      		sbi 43-32,5
+  72               	.LBB8:
+  73               	.LBB9:
+  74               	.LM7:
+  75 0056 8091 8100 		lds r24,129
+  76 005a 8960      		ori r24,lo8(9)
+  77 005c 8093 8100 		sts 129,r24
+  78               	.LM8:
+  79 0060 8091 6F00 		lds r24,111
+  80 0064 8260      		ori r24,lo8(2)
+  81 0066 8093 6F00 		sts 111,r24
+  82               	.LM9:
+  83 006a 8FEF      		ldi r24,lo8(4095)
+  84 006c 9FE0      		ldi r25,hi8(4095)
+  85 006e 9093 8900 		sts (136)+1,r25
+  86 0072 8093 8800 		sts 136,r24
+  87               	.LBE9:
+  88               	.LBE8:
+  89               	.LM10:
+  90               	/* #APP */
+  91               	 ;  21 "microsTest.c" 1
+  92 0076 7894      		sei
+  93               	 ;  0 "" 2
+  94               	/* #NOAPP */
+  95               	.LBB10:
+  96               	.LBB11:
+  97               	.LM11:
+  98 0078 8091 0000 		lds r24,timer1_overflow_count
+  99 007c 9091 0000 		lds r25,(timer1_overflow_count)+1
+ 100 0080 A091 0000 		lds r26,(timer1_overflow_count)+2
+ 101 0084 B091 0000 		lds r27,(timer1_overflow_count)+3
+ 102 0088 EE24      		clr r14
+ 103 008a F82E      		mov r15,r24
+ 104 008c 092F      		mov r16,r25
+ 105 008e 1A2F      		mov r17,r26
+ 106               	.LBE11:
+ 107               	.LBE10:
+ 108               	.LM12:
+ 109 0090 60E2      		ldi r22,lo8(32)
+ 110               	.LVL0:
+ 111               	.L5:
+ 112               	.LBB13:
+ 113               	.LBB12:
+ 114               	.LM13:
+ 115 0092 8091 8400 		lds r24,132
+ 116 0096 9091 8500 		lds r25,(132)+1
+ 117 009a E4E0      		ldi r30,4
+ 118 009c 9695      	1:	lsr r25
+ 119 009e 8795      		ror r24
+ 120 00a0 EA95      		dec r30
+ 121 00a2 01F4      		brne 1b
+ 122 00a4 A0E0      		ldi r26,lo8(0)
+ 123 00a6 B0E0      		ldi r27,hi8(0)
+ 124 00a8 2227      		clr r18
+ 125 00aa 3327      		clr r19
+ 126 00ac A901      		movw r20,r18
+ 127 00ae 281B      		sub r18,r24
+ 128 00b0 390B      		sbc r19,r25
+ 129 00b2 4A0B      		sbc r20,r26
+ 130 00b4 5B0B      		sbc r21,r27
+ 131 00b6 2E19      		sub r18,r14
+ 132 00b8 3F09      		sbc r19,r15
+ 133 00ba 400B      		sbc r20,r16
+ 134 00bc 510B      		sbc r21,r17
+ 135               	.L4:
+ 136               	.LBE12:
+ 137               	.LBE13:
+ 138               	.LBB14:
+ 139               	.LBB15:
+ 140 00be 8091 8400 		lds r24,132
+ 141 00c2 9091 8500 		lds r25,(132)+1
+ 142               	.LBE15:
+ 143               	.LBE14:
+ 144               	.LM14:
+ 145 00c6 74E0      		ldi r23,4
+ 146 00c8 9695      	1:	lsr r25
+ 147 00ca 8795      		ror r24
+ 148 00cc 7A95      		dec r23
+ 149 00ce 01F4      		brne 1b
+ 150 00d0 A0E0      		ldi r26,lo8(0)
+ 151 00d2 B0E0      		ldi r27,hi8(0)
+ 152 00d4 8E0D      		add r24,r14
+ 153 00d6 9F1D      		adc r25,r15
+ 154 00d8 A01F      		adc r26,r16
+ 155 00da B11F      		adc r27,r17
+ 156 00dc 820F      		add r24,r18
+ 157 00de 931F      		adc r25,r19
+ 158 00e0 A41F      		adc r26,r20
+ 159 00e2 B51F      		adc r27,r21
+ 160 00e4 4097      		sbiw r24,16
+ 161 00e6 A105      		cpc r26,__zero_reg__
+ 162 00e8 B105      		cpc r27,__zero_reg__
+ 163 00ea 00F0      		brlo .L4
+ 164               	.LM15:
+ 165 00ec 8BB1      		in r24,43-32
+ 166 00ee 8627      		eor r24,r22
+ 167 00f0 8BB9      		out 43-32,r24
+ 168 00f2 00C0      		rjmp .L5
+ 169               	.LFE7:
+ 171               	.global	micros
+ 173               	micros:
+ 174               	.LFB8:
+ 175               	.LM16:
+ 176               	/* prologue: function */
+ 177               	/* frame size = 0 */
+ 178               	.LM17:
+ 179 00f4 2091 8400 		lds r18,132
+ 180 00f8 3091 8500 		lds r19,(132)+1
+ 181 00fc 74E0      		ldi r23,4
+ 182 00fe 3695      	1:	lsr r19
+ 183 0100 2795      		ror r18
+ 184 0102 7A95      		dec r23
+ 185 0104 01F4      		brne 1b
+ 186 0106 40E0      		ldi r20,lo8(0)
+ 187 0108 50E0      		ldi r21,hi8(0)
+ 188 010a 8091 0000 		lds r24,timer1_overflow_count
+ 189 010e 9091 0000 		lds r25,(timer1_overflow_count)+1
+ 190 0112 A091 0000 		lds r26,(timer1_overflow_count)+2
+ 191 0116 B091 0000 		lds r27,(timer1_overflow_count)+3
+ 192 011a BA2F      		mov r27,r26
+ 193 011c A92F      		mov r26,r25
+ 194 011e 982F      		mov r25,r24
+ 195 0120 8827      		clr r24
+ 196 0122 280F      		add r18,r24
+ 197 0124 391F      		adc r19,r25
+ 198 0126 4A1F      		adc r20,r26
+ 199 0128 5B1F      		adc r21,r27
+ 200               	.LM18:
+ 201 012a B901      		movw r22,r18
+ 202 012c CA01      		movw r24,r20
+ 203               	/* epilogue start */
+ 204 012e 0895      		ret
+ 205               	.LFE8:
+ 207               	.global	timer1_init
+ 209               	timer1_init:
+ 210               	.LFB9:
+ 211               	.LM19:
+ 212               	/* prologue: function */
+ 213               	/* frame size = 0 */
+ 214               	.LM20:
+ 215 0130 E1E8      		ldi r30,lo8(129)
+ 216 0132 F0E0      		ldi r31,hi8(129)
+ 217 0134 8081      		ld r24,Z
+ 218 0136 8960      		ori r24,lo8(9)
+ 219 0138 8083      		st Z,r24
+ 220               	.LM21:
+ 221 013a EFE6      		ldi r30,lo8(111)
+ 222 013c F0E0      		ldi r31,hi8(111)
+ 223 013e 8081      		ld r24,Z
+ 224 0140 8260      		ori r24,lo8(2)
+ 225 0142 8083      		st Z,r24
+ 226               	.LM22:
+ 227 0144 8FEF      		ldi r24,lo8(4095)
+ 228 0146 9FE0      		ldi r25,hi8(4095)
+ 229 0148 9093 8900 		sts (136)+1,r25
+ 230 014c 8093 8800 		sts 136,r24
+ 231               	/* epilogue start */
+ 232               	.LM23:
+ 233 0150 0895      		ret
+ 234               	.LFE9:
+ 236               	.global	timer1_overflow_count
+ 237               	.global	timer1_overflow_count
+ 238               		.section .bss
+ 241               	timer1_overflow_count:
+ 242 0000 0000 0000 		.skip 4,0
+ 291               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 microsTest.c
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:2      *ABS*:0000003f __SREG__
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:5      *ABS*:00000034 __CCP__
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:18     .text:00000000 __vector_11
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:241    .bss:00000000 timer1_overflow_count
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:59     .text:0000004a main
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:173    .text:000000f4 micros
+C:\Users\Behra\AppData\Local\Temp/cccSYVHW.s:209    .text:00000130 timer1_init
+
+UNDEFINED SYMBOLS
+__do_clear_bss

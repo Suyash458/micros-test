@@ -1,0 +1,300 @@
+
+microsTest.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001e6  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000004  00800100  00800100  0000025a  2**0
+                  ALLOC
+  2 .debug_aranges 00000020  00000000  00000000  0000025a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 00000060  00000000  00000000  0000027a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000011d  00000000  00000000  000002da  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000000c5  00000000  00000000  000003f7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000108  00000000  00000000  000004bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000050  00000000  00000000  000005c4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000000a8  00000000  00000000  00000614  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000018  00000000  00000000  000006bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 48 00 	jmp	0x90	; 0x90 <__vector_11>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a4 30       	cpi	r26, 0x04	; 4
+  80:	b1 07       	cpc	r27, r17
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 6d 00 	call	0xda	; 0xda <main>
+  88:	0c 94 f1 00 	jmp	0x1e2	; 0x1e2 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <__vector_11>:
+
+unsigned long timer1_overflow_count = 0;
+unsigned long micros(void);
+void timer1_init(void);
+
+ISR(TIMER1_COMPA_vect){
+  90:	1f 92       	push	r1
+  92:	0f 92       	push	r0
+  94:	0f b6       	in	r0, 0x3f	; 63
+  96:	0f 92       	push	r0
+  98:	11 24       	eor	r1, r1
+  9a:	8f 93       	push	r24
+  9c:	9f 93       	push	r25
+  9e:	af 93       	push	r26
+  a0:	bf 93       	push	r27
+    timer1_overflow_count++;
+  a2:	80 91 00 01 	lds	r24, 0x0100
+  a6:	90 91 01 01 	lds	r25, 0x0101
+  aa:	a0 91 02 01 	lds	r26, 0x0102
+  ae:	b0 91 03 01 	lds	r27, 0x0103
+  b2:	01 96       	adiw	r24, 0x01	; 1
+  b4:	a1 1d       	adc	r26, r1
+  b6:	b1 1d       	adc	r27, r1
+  b8:	80 93 00 01 	sts	0x0100, r24
+  bc:	90 93 01 01 	sts	0x0101, r25
+  c0:	a0 93 02 01 	sts	0x0102, r26
+  c4:	b0 93 03 01 	sts	0x0103, r27
+}
+  c8:	bf 91       	pop	r27
+  ca:	af 91       	pop	r26
+  cc:	9f 91       	pop	r25
+  ce:	8f 91       	pop	r24
+  d0:	0f 90       	pop	r0
+  d2:	0f be       	out	0x3f, r0	; 63
+  d4:	0f 90       	pop	r0
+  d6:	1f 90       	pop	r1
+  d8:	18 95       	reti
+
+000000da <main>:
+
+int main(){
+  da:	ef 92       	push	r14
+  dc:	ff 92       	push	r15
+  de:	0f 93       	push	r16
+  e0:	1f 93       	push	r17
+    DDRD |= (1<<5);
+  e2:	55 9a       	sbi	0x0a, 5	; 10
+    PORTD |= (1<<5);
+  e4:	5d 9a       	sbi	0x0b, 5	; 11
+	return (timer1_overflow_count << 8) + (TCNT1 >> 4); 
+}
+
+void timer1_init(){
+    //TCCR1A |= _BV(COM1A0);
+    TCCR1B |= _BV(CS10) | _BV(WGM12);
+  e6:	80 91 81 00 	lds	r24, 0x0081
+  ea:	89 60       	ori	r24, 0x09	; 9
+  ec:	80 93 81 00 	sts	0x0081, r24
+    TIMSK1 |= _BV(OCIE1A);
+  f0:	80 91 6f 00 	lds	r24, 0x006F
+  f4:	82 60       	ori	r24, 0x02	; 2
+  f6:	80 93 6f 00 	sts	0x006F, r24
+    OCR1A = 4095;
+  fa:	8f ef       	ldi	r24, 0xFF	; 255
+  fc:	9f e0       	ldi	r25, 0x0F	; 15
+  fe:	90 93 89 00 	sts	0x0089, r25
+ 102:	80 93 88 00 	sts	0x0088, r24
+
+int main(){
+    DDRD |= (1<<5);
+    PORTD |= (1<<5);
+    timer1_init();
+    sei();
+ 106:	78 94       	sei
+    }
+}
+
+unsigned long micros() {
+    // Overflow_count * 256 + current_timer_count/16
+	return (timer1_overflow_count << 8) + (TCNT1 >> 4); 
+ 108:	80 91 00 01 	lds	r24, 0x0100
+ 10c:	90 91 01 01 	lds	r25, 0x0101
+ 110:	a0 91 02 01 	lds	r26, 0x0102
+ 114:	b0 91 03 01 	lds	r27, 0x0103
+ 118:	ee 24       	eor	r14, r14
+ 11a:	f8 2e       	mov	r15, r24
+ 11c:	09 2f       	mov	r16, r25
+ 11e:	1a 2f       	mov	r17, r26
+    unsigned long start;
+    while(1)
+    {
+       start = micros();
+       while((micros() - start) < 16);
+       PORTD ^= (1<<5);
+ 120:	60 e2       	ldi	r22, 0x20	; 32
+    }
+}
+
+unsigned long micros() {
+    // Overflow_count * 256 + current_timer_count/16
+	return (timer1_overflow_count << 8) + (TCNT1 >> 4); 
+ 122:	80 91 84 00 	lds	r24, 0x0084
+ 126:	90 91 85 00 	lds	r25, 0x0085
+ 12a:	e4 e0       	ldi	r30, 0x04	; 4
+ 12c:	96 95       	lsr	r25
+ 12e:	87 95       	ror	r24
+ 130:	ea 95       	dec	r30
+ 132:	e1 f7       	brne	.-8      	; 0x12c <main+0x52>
+ 134:	a0 e0       	ldi	r26, 0x00	; 0
+ 136:	b0 e0       	ldi	r27, 0x00	; 0
+ 138:	22 27       	eor	r18, r18
+ 13a:	33 27       	eor	r19, r19
+ 13c:	a9 01       	movw	r20, r18
+ 13e:	28 1b       	sub	r18, r24
+ 140:	39 0b       	sbc	r19, r25
+ 142:	4a 0b       	sbc	r20, r26
+ 144:	5b 0b       	sbc	r21, r27
+ 146:	2e 19       	sub	r18, r14
+ 148:	3f 09       	sbc	r19, r15
+ 14a:	40 0b       	sbc	r20, r16
+ 14c:	51 0b       	sbc	r21, r17
+    sei();
+    unsigned long start;
+    while(1)
+    {
+       start = micros();
+       while((micros() - start) < 16);
+ 14e:	80 91 84 00 	lds	r24, 0x0084
+ 152:	90 91 85 00 	lds	r25, 0x0085
+ 156:	74 e0       	ldi	r23, 0x04	; 4
+ 158:	96 95       	lsr	r25
+ 15a:	87 95       	ror	r24
+ 15c:	7a 95       	dec	r23
+ 15e:	e1 f7       	brne	.-8      	; 0x158 <main+0x7e>
+ 160:	a0 e0       	ldi	r26, 0x00	; 0
+ 162:	b0 e0       	ldi	r27, 0x00	; 0
+ 164:	8e 0d       	add	r24, r14
+ 166:	9f 1d       	adc	r25, r15
+ 168:	a0 1f       	adc	r26, r16
+ 16a:	b1 1f       	adc	r27, r17
+ 16c:	82 0f       	add	r24, r18
+ 16e:	93 1f       	adc	r25, r19
+ 170:	a4 1f       	adc	r26, r20
+ 172:	b5 1f       	adc	r27, r21
+ 174:	40 97       	sbiw	r24, 0x10	; 16
+ 176:	a1 05       	cpc	r26, r1
+ 178:	b1 05       	cpc	r27, r1
+ 17a:	48 f3       	brcs	.-46     	; 0x14e <main+0x74>
+       PORTD ^= (1<<5);
+ 17c:	8b b1       	in	r24, 0x0b	; 11
+ 17e:	86 27       	eor	r24, r22
+ 180:	8b b9       	out	0x0b, r24	; 11
+ 182:	cf cf       	rjmp	.-98     	; 0x122 <main+0x48>
+
+00000184 <micros>:
+    }
+}
+
+unsigned long micros() {
+    // Overflow_count * 256 + current_timer_count/16
+	return (timer1_overflow_count << 8) + (TCNT1 >> 4); 
+ 184:	20 91 84 00 	lds	r18, 0x0084
+ 188:	30 91 85 00 	lds	r19, 0x0085
+ 18c:	74 e0       	ldi	r23, 0x04	; 4
+ 18e:	36 95       	lsr	r19
+ 190:	27 95       	ror	r18
+ 192:	7a 95       	dec	r23
+ 194:	e1 f7       	brne	.-8      	; 0x18e <micros+0xa>
+ 196:	40 e0       	ldi	r20, 0x00	; 0
+ 198:	50 e0       	ldi	r21, 0x00	; 0
+ 19a:	80 91 00 01 	lds	r24, 0x0100
+ 19e:	90 91 01 01 	lds	r25, 0x0101
+ 1a2:	a0 91 02 01 	lds	r26, 0x0102
+ 1a6:	b0 91 03 01 	lds	r27, 0x0103
+ 1aa:	ba 2f       	mov	r27, r26
+ 1ac:	a9 2f       	mov	r26, r25
+ 1ae:	98 2f       	mov	r25, r24
+ 1b0:	88 27       	eor	r24, r24
+ 1b2:	28 0f       	add	r18, r24
+ 1b4:	39 1f       	adc	r19, r25
+ 1b6:	4a 1f       	adc	r20, r26
+ 1b8:	5b 1f       	adc	r21, r27
+}
+ 1ba:	b9 01       	movw	r22, r18
+ 1bc:	ca 01       	movw	r24, r20
+ 1be:	08 95       	ret
+
+000001c0 <timer1_init>:
+
+void timer1_init(){
+    //TCCR1A |= _BV(COM1A0);
+    TCCR1B |= _BV(CS10) | _BV(WGM12);
+ 1c0:	e1 e8       	ldi	r30, 0x81	; 129
+ 1c2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1c4:	80 81       	ld	r24, Z
+ 1c6:	89 60       	ori	r24, 0x09	; 9
+ 1c8:	80 83       	st	Z, r24
+    TIMSK1 |= _BV(OCIE1A);
+ 1ca:	ef e6       	ldi	r30, 0x6F	; 111
+ 1cc:	f0 e0       	ldi	r31, 0x00	; 0
+ 1ce:	80 81       	ld	r24, Z
+ 1d0:	82 60       	ori	r24, 0x02	; 2
+ 1d2:	80 83       	st	Z, r24
+    OCR1A = 4095;
+ 1d4:	8f ef       	ldi	r24, 0xFF	; 255
+ 1d6:	9f e0       	ldi	r25, 0x0F	; 15
+ 1d8:	90 93 89 00 	sts	0x0089, r25
+ 1dc:	80 93 88 00 	sts	0x0088, r24
+}
+ 1e0:	08 95       	ret
+
+000001e2 <_exit>:
+ 1e2:	f8 94       	cli
+
+000001e4 <__stop_program>:
+ 1e4:	ff cf       	rjmp	.-2      	; 0x1e4 <__stop_program>
