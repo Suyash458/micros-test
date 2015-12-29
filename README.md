@@ -12,6 +12,7 @@ in different examples since there's varying overhead involved in checking the lo
 different values and toggling pin 5 on PORTD. 
 
 timer1_overflow_count is incremented once every 256µs and 16 counts of TCNT1 take 1µs
+It wraps around after 71.58 minutes.
 
 ## usage
 
