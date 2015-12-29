@@ -9,7 +9,7 @@ The smallest time interval that can be measured without significant error seems 
 and there's an error of 0.05µs to 0.2µs in the readings. The overhead for the function call seems to
 be 3-4µs in this example so I'm checking for 7µs instead of 10µs. The error and overhead could change 
 in different examples since there's varying overhead involved in checking the loop condition for 
-different values and toggling pin 5 on PORTD. Have to test with other values of OCR1A different timer frequencies
+different values and toggling pin 5 on PORTD. 
 
 timer1_overflow_count is incremented once every 256µs and 16 counts of TCNT1 take 1µs
 
