@@ -65,7 +65,7 @@
   75 0064 9091 0000 		lds r25,(timer1_overflow_count)+1
   76 0068 A091 0000 		lds r26,(timer1_overflow_count)+2
   77 006c B091 0000 		lds r27,(timer1_overflow_count)+3
-  78 0070 66E0      		ldi r22,6
+  78 0070 6AE0      		ldi r22,10
   79 0072 880F      	1:	lsl r24
   80 0074 991F      		rol r25
   81 0076 AA1F      		rol r26
@@ -263,9 +263,9 @@
  280               	.LBB36:
  281               	.LBB37:
  282               	.LM36:
- 283 0160 10EB      		ldi r17,lo8(1200)
+ 283 0160 14E0      		ldi r17,lo8(260)
  284 0162 C12E      		mov r12,r17
- 285 0164 14E0      		ldi r17,hi8(1200)
+ 285 0164 11E0      		ldi r17,hi8(260)
  286 0166 D12E      		mov r13,r17
  287               	.LBE37:
  288               	.LBE36:
@@ -286,7 +286,7 @@
  303 0174 F090 0000 		lds r15,(timer1_overflow_count)+1
  304 0178 0091 0000 		lds r16,(timer1_overflow_count)+2
  305 017c 1091 0000 		lds r17,(timer1_overflow_count)+3
- 306 0180 A6E0      		ldi r26,6
+ 306 0180 AAE0      		ldi r26,10
  307 0182 EE0C      	1:	lsl r14
  308 0184 FF1C      		rol r15
  309 0186 001F      		rol r16
@@ -424,21 +424,21 @@
  518               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 microsTest.c
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:2      *ABS*:0000003f __SREG__
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:3      *ABS*:0000003e __SP_H__
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:4      *ABS*:0000003d __SP_L__
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:5      *ABS*:00000034 __CCP__
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:18     .text:00000000 __vector_11
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:433    .bss:00000000 timer1_overflow_count
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:59     .text:0000004a micros
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:98     .text:0000008c timer1_init
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:127    .text:000000ae USART0Init
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:156    .text:000000ce USART0SendByte
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:193    .text:000000f4 USART0ReceiveByte
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:229    .text:00000112 main
-C:\Users\Behra\AppData\Local\Temp/ccvPWv1J.s:439    .data:0000000d usart0_str
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:2      *ABS*:0000003f __SREG__
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:5      *ABS*:00000034 __CCP__
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:18     .text:00000000 __vector_11
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:433    .bss:00000000 timer1_overflow_count
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:59     .text:0000004a micros
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:98     .text:0000008c timer1_init
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:127    .text:000000ae USART0Init
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:156    .text:000000ce USART0SendByte
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:193    .text:000000f4 USART0ReceiveByte
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:229    .text:00000112 main
+C:\Users\Behra\AppData\Local\Temp/ccazPj7B.s:439    .data:0000000d usart0_str
 
 UNDEFINED SYMBOLS
 __iob

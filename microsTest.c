@@ -30,14 +30,16 @@ int main() {
     unsigned long start, finish;
     while(1) {
         /*
-        The error in measurement is only around 2µs
-        Arduino's micros() function has an error of around 10-30µs
+        The error in measurement is only around 2µs 
+        across a wide range of values(tested till 300µs)
+        Arduino's micros() function has an error of around 10-30µs 
+        when the measurement inverval crosses 60µs
         Change OCR1A's value as per your need since timer1_overflow_count 
         will wraparound after it reaches 429,496,7295.
-        Conversion: 16 counts of TCNT1 = 1µs
+        Conversion: 16 counts of TCNT1 = 1µs @ F_CPU = 16Mhz
         */
         start = micros();
-        _delay_us(300);
+        _delay_us(65);
         finish = micros();
         if (finish > start)
             printf("%lu %lu %lu\n", finish, start, finish - start);
@@ -46,7 +48,7 @@ int main() {
 
 unsigned long micros() {
     // Overflow_count * 1024 + current_timer_count/16
-	return (timer1_overflow_count << 6) + (TCNT1 >> 4); 
+	return (timer1_overflow_count << 10) + (TCNT1 >> 4); 
 }
 
 void timer1_init() {
